@@ -60,4 +60,10 @@ void addNode() {
 			START = newNode; 
 		}
 	}
+}int main() 
+{
+	while (true) 
+	{
+
+	}
 }
