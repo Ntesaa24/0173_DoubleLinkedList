@@ -61,7 +61,7 @@ void addNode() {
 			START = newNode;
 		}
 	}
-
+}
 bool search(int rollNo, Node **previous, Node **current)
 {
 	*previous = NULL;
@@ -98,7 +98,7 @@ void deleteNode()
 		current = current->next;
 	}
 
-	if (current == /NULL)
+	if (current == NULL)
 	{
 		cout << "\033[31mthe record with roll number " << rollNo << " not found\033[0m" << endl;
 		return;
@@ -108,7 +108,7 @@ void deleteNode()
 	if (current == START)
 	{
 		START = START->next; //step 2: update the START pointer
-		if (START = START->next != NULL)
+		if (START != NULL)
 		{						//
 			START->prev = NULL; // step 
 		}
