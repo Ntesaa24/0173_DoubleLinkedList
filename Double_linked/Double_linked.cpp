@@ -24,12 +24,12 @@ void addNode() {
 	if (START == NULL || newNode->noMhs <= START->noMhs) { // step 2: insert the new node 
 
 		if (START != NULL && newNode->noMhs == START->noMhs) {
-			cout << "\033[31Dumplicate roll numbers not allowed\033[0m" << endl; 
-			return; 
+			cout << "\033[31Dumplicate roll numbers not allowed\033[0m" << endl;
+			return;
 		}
 		// if the list is empty, make the new node the START 
 		newNode->next = START;  // step 3: make the new node point to the first node 
-		if (START != NULL) {	
+		if (START != NULL) {
 			START->prev = newNode; 	// STEP 4: make the first node point to the new node 
 
 		}
@@ -55,15 +55,79 @@ void addNode() {
 
 		if (previous != NULL) {
 			previous->next = newNode; // step 7. Make the next field of the previous node 
-		} else {
+		}
+		else {
 			// if previous is still NULL, it means newNode is now the first node 
-			START = newNode; 
+			START = newNode;
 		}
 	}
-}int main() 
-{
-	while (true) 
-	{
 
+bool search(int rollNo, Node **previous, Node **current)
+{
+	*previous = NULL;
+	*current = START;
+	while (*current != NULL && (*current)->noMhs != rollNo)
+	{
+		*previous = *current;
+		*current = (*current)->next;
 	}
+	return (*current != NULL);
+}
+
+void deleteNode()
+{
+	Node* previous, * current; // 
+	int rollNo;
+
+	cout << "\nEnter the roll number of the student whose record is to be deleted: ";
+	cin >> rollNo; // step 3: get the roll number to be deleted 
+
+	if (START == NULL)
+	{
+		cout << "List is empty" << endl;
+		return;
+	}
+
+	current = START; // Step 1: start from the first node 
+	previous = NULL;
+
+	// Locate the node to be deleted 
+	while (current != NULL && current->noMhs != rollNo)
+	{
+		previous = current;
+		current = current->next;
+	}
+
+	if (current == /NULL)
+	{
+		cout << "\033[31mthe record with roll number " << rollNo << " not found\033[0m" << endl;
+		return;
+	}
+
+	// Node to be deleted is the first node 
+	if (current == START)
+	{
+		START = START->next; //step 2: update the START pointer
+		if (START = START->next != NULL)
+		{						//
+			START->prev = NULL; // step 
+		}
+	}
+	else
+	{ // Node to be deleted is not the first node 
+		previous->next = current->prev;
+		if (current->next != NULL)
+		{ // If there's a successor, update its prev pointer 
+			current->next->prev = previous;
+		}
+	}
+
+	// Release the memory of the node marked as current 
+	delete current;
+	cout << "\x1b[32mRecord with roll number " << rollNo << " deleted\x1b[0m" << endl;
+}
+
+bool listEmpty()
+{
+	return (START == NULL);
 }
